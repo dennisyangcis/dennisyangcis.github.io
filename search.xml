@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>UML初探</title>
+      <link href="/dennisyangcis/dennisyangcis.github.io.git/2022/06/26/uml-chu-tan/"/>
+      <url>/dennisyangcis/dennisyangcis.github.io.git/2022/06/26/uml-chu-tan/</url>
+      
+        <content type="html"><![CDATA[<h1 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h1><p>UML中的类图用来表示类、接口、实例等之间的相互的静态关系。</p><h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>继承关系，使用实线空心箭头表示，箭头由子类指向父类。<br><img src="/dennisyangcis/dennisyangcis.github.io.git/./UML%E5%88%9D%E6%8E%A2/%E7%BB%A7%E6%89%BF.jpg" alt="继承"><br>上图里ChildClass继承自ParentClass，实现了methodA方法和一个静态方法methodC。<br>而ParentClass是个abstract类，有两个字段field1，静态field2。和抽象方法methodA和methodB。</p><h3 id="类的表示"><a href="#类的表示" class="headerlink" title="类的表示"></a>类的表示</h3><p>上图中的长方形表示类，内部自上而下分成三个区域：</p><ul><li>类名：类名使用加粗字体表示，如果是抽象类，加上斜体，如果是接口，在类名上方再加上interface标识</li><li>字段名：static字段加上下划线表示</li><li>方法名：如果是抽象方法，则使用斜体</li></ul><blockquote><p>UML规定的方向是从子类指向父类。按照以下法则记忆，会更清晰：在定义子类时需要用extends关键字指定父类，因此子类一定知道父类的定义。反之则不然。只有知道对方时才能够箭头只想对方，因此箭头方向是子类指向父类。</p></blockquote><h2 id="接口与实现"><a href="#接口与实现" class="headerlink" title="接口与实现"></a>接口与实现</h2><p>接口和实现类之间使用虚线箭头连接，由实现类指向接口定义。<br><img src="/dennisyangcis/dennisyangcis.github.io.git/./UML%E5%88%9D%E6%8E%A2/%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0.jpg" alt="接口"><br>Printable抽象类在长方形框中使用了&lt;&lt;interface&gt;&gt;来标识。</p><h2 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h2><p>聚合是一种不同类之间的逻辑关系。一个类定义中，只要持有另一个类的实例，无论一个还是多个，他们之间就是聚合关系。如下图。<br><img src="/dennisyangcis/dennisyangcis.github.io.git/./UML%E5%88%9D%E6%8E%A2/%E8%81%9A%E5%90%88.jpg" alt="聚合"><br>Basket类中定义了fruits实例，Fruit类又有color字段。通俗来说就是篮子中放有多个水果，每个水果有一种颜色。用尾部是空心菱形的实线箭头聚合关系。</p><h2 id="访问控制"><a href="#访问控制" class="headerlink" title="访问控制"></a>访问控制</h2><p>Java类中的方法和字段，均有自己的访问控制属性。所以UML类图里也需要体现不同访问控制符对应的表示方式。<br><img src="/dennisyangcis/dennisyangcis.github.io.git/./UML%E5%88%9D%E6%8E%A2/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6.jpg" alt="访问控制"><br>UML通过字段和方法名前面加上不同符号来区分不同的访问控制：</p><ol><li>“+”表示public方法和字段</li><li>“-”表示private方法和字段</li><li>“#”表示protect方法和字段</li><li>“~”表示default</li></ol><h1 id="类的关联"><a href="#类的关联" class="headerlink" title="类的关联"></a>类的关联</h1><p>不同类之间使用线箭头连接，并在连线上说明动作，加上黑色三角，就可以表示类之间的关联关系。<br><img src="/dennisyangcis/dennisyangcis.github.io.git/./UML%E5%88%9D%E6%8E%A2/relation.jpg" alt="relation"></p><h1 id="时序图"><a href="#时序图" class="headerlink" title="时序图"></a>时序图</h1><p>时序图可以表示程序的运行过程中内部方法的调用顺序，逻辑运行情况等等。</p><blockquote><p>类图中表示的是“不随时间变化的类关系”，而时序图则相反，表示的是“随着时间流逝，发生变化的部分，或进行的行为”<br>下图是时序图的一个例子。<br><img src="/dennisyangcis/dennisyangcis.github.io.git/./UML%E5%88%9D%E6%8E%A2/sequence.jpg" alt="sequence"><br>图左侧是代码，右侧是时序图样例。代码由三个类组成，分别是Client类、Server类、Device类。在时序图上，实例使用实例名加冒号加类名的方式：</p></blockquote><pre class="line-numbers language-none"><code class="language-none">server1:Server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>如果只有一个实例，则可省略实例名。每个实例下方都会延伸一条虚线，我们称其为<strong>生命线</strong>。可以理解为时间从上到下流逝，在每个实例的生命周期中，串联起一个实例的不同行为。这个时序图模拟了一次客户端调用服务器，写入数据的过程。</p><p>首先是用户调用client.work方法，client实例会根据方法的实现，调用server.open方法并立刻返回，然后再次调用server.print方法，这时server对象会调用device.write进行打印操作，完成后返回server，server之后再返回client。client收到print方法的返回后，进行server.close。最终完成整个代码流程。</p><blockquote><p>Notice: 本文主要内容摘自《图解设计模式》</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 设计模式 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> UML </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>hello world</title>
+      <link href="/dennisyangcis/dennisyangcis.github.io.git/2022/06/26/hello-world/"/>
+      <url>/dennisyangcis/dennisyangcis.github.io.git/2022/06/26/hello-world/</url>
+      
+        <content type="html"><![CDATA[<h1 id="第一篇测试文章"><a href="#第一篇测试文章" class="headerlink" title="第一篇测试文章"></a>第一篇测试文章</h1><p>测试代码</p><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token punctuation">&#123;</span>    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Hello world!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
